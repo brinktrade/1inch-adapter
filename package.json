@@ -1,0 +1,35 @@
+{
+    "name": "@brinkninja/adapters",
+    "version": "0.1.0",
+    "scripts": {
+      "compile": "hardhat compile",
+      "test": "hardhat test",
+      "benchmark": "mocha benchmark --exit --recursive --file ./benchmark/setupTeardown.js --timeout 600000"
+    },
+    "description": "Adapter contract for 1inch router",
+    "author": "Brink",
+    "license": "GPL-3.0-or-later",
+    "devDependencies": {
+      "ethereum-waffle": "^3.4.0",
+      "hardhat": "^2.1.2",
+      "snap-shot-it": "^7.9.6"
+    },
+    "main": "index.js",
+    "directories": {
+      "test": "test"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/brinktrade/1inch-adapter.git"
+    },
+    "keywords": [
+      "solidity",
+      "ethereum",
+      "smart",
+      "contracts"
+    ],
+    "bugs": {
+      "url": "https://github.com/brinktrade/1inch-adapter/issues"
+    },
+    "homepage": "https://github.com/brinktrade/1inch-adapter#readme"
+  }
