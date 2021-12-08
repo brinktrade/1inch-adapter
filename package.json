@@ -10,6 +10,7 @@
     "author": "Brink",
     "license": "GPL-3.0-or-later",
     "devDependencies": {
+			"dotenv": "^10.0.0",
       "ethereum-waffle": "^3.4.0",
       "hardhat": "^2.1.2",
       "snap-shot-it": "^7.9.6"
