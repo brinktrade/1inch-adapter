@@ -31,6 +31,13 @@ contract OneInchAdapter is Withdrawable {
         revert(0, returndatasize())
       }
     }
-    tokenOut.uniTransfer(account, tokenOutAmount);
+    if (!tokenOut.isETH()) {
+      tokenOut.uniTransfer(account, tokenOutAmount);
+    } else {
+      bool sent = account.send(tokenOutAmount);
+      require(sent, "Failed to send Ether");
+    }
   }
+
+  receive() external payable { }
 }
