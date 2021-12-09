@@ -1,39 +1,40 @@
 {
-    "name": "@brinkninja/adapters",
-    "version": "0.1.0",
-    "scripts": {
-      "compile": "hardhat compile",
-      "test": "hardhat test",
-      "benchmark": "mocha benchmark --exit --recursive --file ./benchmark/setupTeardown.js --timeout 600000"
-    },
-    "description": "Adapter contract for 1inch router",
-    "author": "Brink",
-		"license": "GPL-3.0-or-later",
-		"dependencies": {
-			"web3-eth-abi": "^1.2.6"
-		},
-    "devDependencies": {
-			"dotenv": "^10.0.0",
-      "ethereum-waffle": "^3.4.0",
-      "hardhat": "^2.1.2",
-      "snap-shot-it": "^7.9.6"
-    },
-    "main": "index.js",
-    "directories": {
-      "test": "test"
-    },
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/brinktrade/1inch-adapter.git"
-    },
-    "keywords": [
-      "solidity",
-      "ethereum",
-      "smart",
-      "contracts"
-    ],
-    "bugs": {
-      "url": "https://github.com/brinktrade/1inch-adapter/issues"
-    },
-    "homepage": "https://github.com/brinktrade/1inch-adapter#readme"
-  }
+  "name": "@brinkninja/adapters",
+  "version": "0.1.0",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "benchmark": "mocha benchmark --exit --recursive --file ./benchmark/setupTeardown.js --timeout 600000"
+  },
+  "description": "Adapter contract for 1inch router",
+  "author": "Brink",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "@brinkninja/utils": "^0.4.2",
+    "web3-eth-abi": "^1.2.6"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "ethereum-waffle": "^3.4.0",
+    "hardhat": "^2.1.2",
+    "snap-shot-it": "^7.9.6"
+  },
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brinktrade/1inch-adapter.git"
+  },
+  "keywords": [
+    "solidity",
+    "ethereum",
+    "smart",
+    "contracts"
+  ],
+  "bugs": {
+    "url": "https://github.com/brinktrade/1inch-adapter/issues"
+  },
+  "homepage": "https://github.com/brinktrade/1inch-adapter#readme"
+}

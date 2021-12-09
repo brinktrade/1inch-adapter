@@ -18,7 +18,7 @@ contract OneInchAdapter is Withdrawable {
   constructor (address _owner) Withdrawable(_owner) {}
 
   function oneInchSwap(bytes memory data, IERC20 tokenIn, uint tokenInAmount, IERC20 tokenOut, uint tokenOutAmount, address payable account) external {
-    if (!tokenIn.isEth()) {
+    if (!tokenIn.isETH()) {
       if (tokenIn.allowance(address(this), AGG_ROUTER_V4) < tokenInAmount) {
         tokenIn.approve(AGG_ROUTER_V4, MAX_INT);
       }
@@ -29,9 +29,6 @@ contract OneInchAdapter is Withdrawable {
       switch result
       case 0 {
         revert(0, returndatasize())
-      }
-      default {
-        return(0, returndatasize())
       }
     }
     tokenOut.uniTransfer(account, tokenOutAmount);
