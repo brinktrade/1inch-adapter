@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "compile": "hardhat compile",
-    "test": "hardhat test",
-    "benchmark": "mocha benchmark --exit --recursive --file ./benchmark/setupTeardown.js --timeout 600000"
+    "test": "hardhat test"
   },
   "description": "Adapter contract for 1inch router",
   "author": "Brink",
@@ -19,7 +18,6 @@
     "hardhat": "^2.1.2",
     "snap-shot-it": "^7.9.6"
   },
-  "main": "index.js",
   "directories": {
     "test": "test"
   },

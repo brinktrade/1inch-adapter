@@ -3,6 +3,7 @@ const { ethers } = hre
 const { expect } = require('chai')
 const brinkUtils = require('@brinkninja/utils')
 const { MAX_UINT_256, BN } = brinkUtils
+const snapshotGas = require('./helpers/snapshotGas')
 
 const DAI_WHALE = '0xe78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0'
 const WETH_ADDRESS = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
@@ -54,6 +55,10 @@ describe('oneInchSwap', function () {
       expect(finalWethBalance.eq(initialWethBalance.add(BN('10')))).to.equal(true)
       expect(finalDaiBalance.eq(initialDaiBalance.sub(BN(ONE_HUNDRED)))).to.equal(true)
     })
+
+    it('gas cost', async function () {
+      await snapshotGas(await this.adapter.oneInchSwap(daiToWethCallData, DAI_ADDRESS, ONE_HUNDRED, WETH_ADDRESS, '10', this.accountAddress))
+    })
   })
 
   describe('eth to token', function () {
@@ -72,6 +77,13 @@ describe('oneInchSwap', function () {
       expect(finalDaiBalance.eq(initialDaiBalance.add(BN('10')))).to.equal(true)
       expect(finalEthBalance.eq(initialEthBalance)).to.equal(true)
     })
+
+    it('gas cost', async function () {
+      const overrides = {
+        value: ethers.utils.parseEther("100.0") //sending 100 ether with call
+      }
+      await snapshotGas(await this.adapter.oneInchSwap(ethtoDaiCallData, ETH_ADDRESS, ONE_HUNDRED, DAI_ADDRESS, '10', this.accountAddress, overrides))
+    })
   })
 
   describe('token to eth', function () {
@@ -86,6 +98,10 @@ describe('oneInchSwap', function () {
 
       expect(finalEthBalance.eq(initialEthBalance.add(BN('10')))).to.equal(true)
       expect(finalDaiBalance.eq(initialDaiBalance.sub(BN(ONE_HUNDRED)))).to.equal(true)
+    })
+
+    it('gas cost', async function () {
+      await snapshotGas(await this.adapter.oneInchSwap(daiToEthCallData, DAI_ADDRESS, ONE_HUNDRED, ETH_ADDRESS, '10', this.accountAddress))
     })
   })
 })
