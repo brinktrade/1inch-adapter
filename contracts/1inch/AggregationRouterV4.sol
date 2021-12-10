@@ -64,6 +64,7 @@ contract AggregationRouterV4 is Ownable, EthReceiver, Permitable, UnoswapRouter,
         IERC20 dstToken = desc.dstToken;
 
         bool srcETH = srcToken.isETH();
+
         if (flags & _REQUIRES_EXTRA_ETH != 0) {
             require(msg.value > (srcETH ? desc.amount : 0), "Invalid msg.value");
         } else {

@@ -17,12 +17,13 @@ contract OneInchAdapter is Withdrawable {
 
   constructor (address _owner) Withdrawable(_owner) {}
 
-  function oneInchSwap(bytes memory data, IERC20 tokenIn, uint tokenInAmount, IERC20 tokenOut, uint tokenOutAmount, address payable account) external {
+  function oneInchSwap(bytes memory data, IERC20 tokenIn, uint tokenInAmount, IERC20 tokenOut, uint tokenOutAmount, address payable account) external payable {
     if (!tokenIn.isETH()) {
       if (tokenIn.allowance(address(this), AGG_ROUTER_V4) < tokenInAmount) {
         tokenIn.approve(AGG_ROUTER_V4, MAX_INT);
       }
     }
+
     assembly {
       let result := call(gas(), AGG_ROUTER_V4, callvalue(), add(data, 0x20), mload(data), 0, 0)
       returndatacopy(0, 0, returndatasize())
@@ -31,11 +32,11 @@ contract OneInchAdapter is Withdrawable {
         revert(0, returndatasize())
       }
     }
+
     if (!tokenOut.isETH()) {
       tokenOut.uniTransfer(account, tokenOutAmount);
     } else {
-      bool sent = account.send(tokenOutAmount);
-      require(sent, "Failed to send Ether");
+      account.send(tokenOutAmount);
     }
   }
 
