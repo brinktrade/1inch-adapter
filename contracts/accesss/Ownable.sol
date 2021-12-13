@@ -1,6 +1,7 @@
-pragma solidity ^0.7.0;
+// SPDX-License-Identifier: GPL-3.0-or-later
+pragma solidity =0.8.10;
 
-import '../utils/Context.sol';
+import "../utils/Context.sol";
 
 /**
  * @dev Contract module which provides a basic access control mechanism, where
@@ -22,10 +23,8 @@ abstract contract Ownable is Context {
     /**
      * @dev Initializes the contract setting the deployer as the initial owner.
      */
-    constructor () {
-        address msgSender = _msgSender();
-        _owner = msgSender;
-        emit OwnershipTransferred(address(0), msgSender);
+    constructor() {
+        _setOwner(_msgSender());
     }
 
     /**
@@ -51,8 +50,7 @@ abstract contract Ownable is Context {
      * thereby removing any functionality that is only available to the owner.
      */
     function renounceOwnership() public virtual onlyOwner {
-        emit OwnershipTransferred(_owner, address(0));
-        _owner = address(0);
+        _setOwner(address(0));
     }
 
     /**
@@ -61,7 +59,12 @@ abstract contract Ownable is Context {
      */
     function transferOwnership(address newOwner) public virtual onlyOwner {
         require(newOwner != address(0), "Ownable: new owner is the zero address");
-        emit OwnershipTransferred(_owner, newOwner);
+        _setOwner(newOwner);
+    }
+
+    function _setOwner(address newOwner) private {
+        address oldOwner = _owner;
         _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
     }
 }

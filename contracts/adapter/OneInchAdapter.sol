@@ -1,24 +1,23 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-pragma solidity ^0.7.6;
-pragma abicoder v2;
+pragma solidity =0.8.10;
+pragma abicoder v1;
 
-import '../1inch/math/SafeMath.sol';
-import '../1inch/token/SafeERC20.sol';
-import '../1inch/helpers/UniERC20.sol';
-import './Withdrawable.sol';
+import '../token/IERC20.sol';
+import '../accesss/Withdrawable.sol';
 
 /// @title Brink OneInchAdapter
 /// @notice Deployed once and used by Brink executors to fulfill swaps. Uses AggregationRouterV4 from 1inch.
 contract OneInchAdapter is Withdrawable {
-  using SafeMath for uint256;
-  using UniERC20 for IERC20;
-  using SafeERC20 for IERC20;
 
   /// @dev Contract Address of the 1inch AggregationRouterV4
   address constant AGG_ROUTER_V4 = 0x1111111254fb6c44bAC0beD2854e76F90643097d;
 
   /// @dev Max uint
   uint256 MAX_INT = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
+
+  /// @dev Ethereum address representations
+  IERC20 private constant _ETH_ADDRESS = IERC20(0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE);
+  IERC20 private constant _ZERO_ADDRESS = IERC20(0x0000000000000000000000000000000000000000);
 
   /// @dev Constructor sets owner of adapter contract
   constructor (address _owner) Withdrawable(_owner) {}
@@ -32,7 +31,7 @@ contract OneInchAdapter is Withdrawable {
   /// @param tokenOutAmount Token amount deposited
   /// @param account Address of the account to receive the tokenOut
   function oneInchSwap(bytes memory data, IERC20 tokenIn, uint tokenInAmount, IERC20 tokenOut, uint tokenOutAmount, address payable account) external payable {
-    if (!tokenIn.isETH()) {
+    if (!isETH(tokenIn)) {
       if (tokenIn.allowance(address(this), AGG_ROUTER_V4) < tokenInAmount) {
         tokenIn.approve(AGG_ROUTER_V4, MAX_INT);
       }
@@ -47,11 +46,17 @@ contract OneInchAdapter is Withdrawable {
       }
     }
 
-    if (!tokenOut.isETH()) {
-      tokenOut.uniTransfer(account, tokenOutAmount);
+    if (!isETH(tokenOut)) {
+      tokenOut.transfer(account, tokenOutAmount);
     } else {
-      account.send(tokenOutAmount);
+      account.transfer(tokenOutAmount);
     }
+  }
+
+  /// @dev Checks if IERC20 token address is an ETH representation
+  /// @param token address of a token
+  function isETH(IERC20 token) internal pure returns (bool) {
+    return (token == _ZERO_ADDRESS || token == _ETH_ADDRESS);
   }
 
   receive() external payable { }
