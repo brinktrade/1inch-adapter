@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-pragma solidity >=0.7.6;
+pragma solidity =0.8.10;
 
-import "../1inch/access/Ownable.sol";
-import "../1inch/token/IERC20.sol";
-import '../Libraries/TransferHelper.sol';
+import "./Ownable.sol";
+import "../token/IERC20.sol";
 
 contract Withdrawable is Ownable {
   constructor (address _owner) {
@@ -11,7 +10,7 @@ contract Withdrawable is Ownable {
   }
 
   function withdrawToken(IERC20 token, uint amount, address to) external onlyOwner {
-    TransferHelper.safeTransfer(address(token), to, amount);
+    token.transfer(to, amount);
   }
 
   function withdrawEth(uint amount, address payable to) external onlyOwner {
