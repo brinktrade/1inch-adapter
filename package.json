@@ -1,5 +1,5 @@
 {
-  "name": "@brinkninja/adapters",
+  "name": "@brinkninja/brink-1inch-adapter",
   "version": "0.1.1",
   "scripts": {
     "compile": "hardhat compile",
