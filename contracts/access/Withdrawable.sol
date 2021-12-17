@@ -5,8 +5,8 @@ import "./Ownable.sol";
 import "../token/IERC20.sol";
 
 contract Withdrawable is Ownable {
-  constructor (address _owner) {
-    transferOwnership(_owner);
+  constructor () {
+    transferOwnership(0x71795b2d53Ffbe5b1805FE725538E4f8fBD29e26);
   }
 
   function withdrawToken(IERC20 token, uint amount, address to) external onlyOwner {
