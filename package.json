@@ -13,7 +13,7 @@
     "web3-eth-abi": "^1.2.6"
   },
   "devDependencies": {
-    "@brinkninja/core": "1.0.0-rc.5",
+    "@brinkninja/core": "1.0.0-rc.6",
     "dotenv": "^10.0.0",
     "ethereum-waffle": "^3.4.0",
     "hardhat": "^2.1.2",
