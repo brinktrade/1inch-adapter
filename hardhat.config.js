@@ -1,6 +1,10 @@
 require('dotenv').config()
 require('@nomiclabs/hardhat-ethers')
 
+const chai = require('chai')
+const { solidity } = require('ethereum-waffle')
+chai.use(solidity)
+
 const { ALCHEMY_URL } = process.env
 if (!ALCHEMY_URL) {
   throw new Error(`ALCHEMY_URL required, add to .env file`)

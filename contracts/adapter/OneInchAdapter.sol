@@ -3,7 +3,7 @@ pragma solidity =0.8.10;
 pragma abicoder v1;
 
 import '../token/IERC20.sol';
-import '../accesss/Withdrawable.sol';
+import '../access/Withdrawable.sol';
 
 /// @title Brink OneInchAdapter
 /// @notice Deployed once and used by Brink executors to fulfill swaps. Uses AggregationRouterV4 from 1inch.
@@ -18,9 +18,6 @@ contract OneInchAdapter is Withdrawable {
   /// @dev Ethereum address representations
   IERC20 private constant _ETH_ADDRESS = IERC20(0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE);
   IERC20 private constant _ZERO_ADDRESS = IERC20(0x0000000000000000000000000000000000000000);
-
-  /// @dev Constructor sets owner of adapter contract
-  constructor (address _owner) Withdrawable(_owner) {}
 
   /// @dev Makes a call to AggregationRouterV4 with swap byte data
   /// @dev returns the requested tokenOutAmount to Account and keeps the rest.

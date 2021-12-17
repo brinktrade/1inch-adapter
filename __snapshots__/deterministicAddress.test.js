@@ -1,3 +1,3 @@
 exports['OneInchAdapter.sol deterministic address check 1'] = `
-0x0a9B5e81535fa011d104c21869eeC0838D09CC68
+0x618B6F1bC13a4f9264584C931E7Dfe2BB12B2Cac
 `
