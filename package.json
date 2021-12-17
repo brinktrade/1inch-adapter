@@ -20,7 +20,7 @@
     "snap-shot-it": "^7.9.6"
   },
   "directories": {
-    "test": "test"
+    "artifacts": "artifacts"
   },
   "repository": {
     "type": "git",
