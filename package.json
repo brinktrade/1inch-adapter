@@ -3,7 +3,8 @@
   "version": "1.0.0-rc.1",
   "scripts": {
     "compile": "hardhat compile",
-    "test": "hardhat test"
+    "test": "hardhat test",
+    "exports-gen": "node ./generateExports.js"
   },
   "description": "Adapter contract for 1inch router",
   "author": "Brink",
